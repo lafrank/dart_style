@@ -1,3 +1,60 @@
+
+## Motivation of this repository
+
+The simple and minimal goal of this fork of dart_style repository is to allow 
+the formatter keeping curly braces for class and method bodies at the beginning 
+of a new line, making the code more legible for C# developers.
+
+Putting opening curly braces at line ending and the closing curly braces to the
+beginning of a line makes them overly redundant, like if the code block was based 
+on indention just like in Python (which is terrible).
+
+While I do understand the original goal of the dart team for this repository to 
+unify the dart code format, in my eyes not any goal can justify hardcoding static 
+rules to the codebase.
+
+## Building your own formatter on Windows
+
+1. Clone the original dart_style repository (or this one)
+2. Make necessary changes. 
+3. Compile the package.
+
+```sh
+dart compile exe bin/format.dart -o bin/my_dartfmt.exe
+```
+
+4. Move the executable tp the directory in PATH. I personally use my own ~/bin
+
+```sh
+mv my_dartfmt ~/bin   # any directory in PATH, I use my own ~/bin
+```
+
+## Enable the new formatter in VSCode
+
+1. Install the [Custom Local Formatters](https://github.com/JKillian/vscode-custom-local-formatters) extension
+2. Add to VSCode's settings JSON (global, workspace, folder - at your choice):
+
+```jsonc
+"dart.enableSdkFormatter": false,
+   
+"[dart]": {
+    // ...
+    "editor.defaultFormatter": "jkillian.custom-local-formatters",
+    // ... 
+},
+
+"customLocalFormatters.formatters": [
+    {
+        "command": "my_dartfmt.exe -l 200 ${file}",
+        "languages": ["dart"]
+    }
+],
+
+```
+
+
+## -------------------- Original readme follows --------------------
+
 The dart_style package defines an opinionated automated formatter for Dart code.
 It replaces the whitespace in your program with what it deems to be the
 best formatting for it. It also makes minor changes around non-semantic
