@@ -26,11 +26,8 @@ rules to the codebase.
 dart compile exe bin/format.dart -o bin/my_dartfmt.exe
 ```
 
-4. Move the executable tp the directory in PATH. I personally use my own ~/bin
-
-```sh
-mv my_dartfmt ~/bin   # any directory in PATH, I use my own ~/bin
-```
+4. Move the executable to the directory of your preference.
+   Forget about PATH (this inot linux), just reference the executable below with full path.
 
 ## Enable the new formatter in VSCode
 
@@ -48,7 +45,7 @@ mv my_dartfmt ~/bin   # any directory in PATH, I use my own ~/bin
 
 "customLocalFormatters.formatters": [
     {
-        "command": "my_dartfmt.exe -l 200 ${file}",
+        "command": "full_path\my_dartfmt.exe -l 200 ${file}",
         "languages": ["dart"]
     }
 ],
